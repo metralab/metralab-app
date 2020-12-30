@@ -6,8 +6,12 @@ import 'package:meta/meta.dart';
 List<double> deflectionFromInclinometers({
   @required final List<InclinometerData> inclinometersData,
   double beamLength,
-  final double nSteps = 10,
+  final int nSteps = 10,
 }) {
+  if (inclinometersData.isEmpty) {
+    return <double>[];
+  }
+
   final nInclinometers = inclinometersData.length;
   final distances =
       inclinometersData.map((data) => data.distanceMillimeters).toList();
@@ -33,7 +37,7 @@ List<double> deflectionFromInclinometers({
 
   final nodal_loads = inv_basis * Vector.column([0.0, ...inclinations]);
 
-  final steps = _linSpace(length: 11, end: beamLength);
+  final steps = _linSpace(length: nSteps + 1, end: beamLength);
   final deflections = [
     for (final step in steps)
       (Vector.row([
