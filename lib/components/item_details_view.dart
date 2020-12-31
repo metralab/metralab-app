@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../data/item.dart';
+import 'deflection_results_card.dart';
 
 class ItemDetailsView extends StatelessWidget {
   const ItemDetailsView(this.item, {Key key}) : super(key: key);
@@ -24,7 +25,10 @@ class ItemDetailsView extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      const Text('Distances'),
+                      Text(
+                        'Distances',
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
                       ...item.distances
                           .map((distance) => Text(distance.toString()))
                           .toList(),
@@ -32,7 +36,10 @@ class ItemDetailsView extends StatelessWidget {
                   ),
                   Column(
                     children: [
-                      const Text('Inclinations'),
+                      Text(
+                        'Inclinations',
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
                       ...item.inclinations
                           .map((inclination) => Text(inclination.toString()))
                           .toList(),
@@ -42,19 +49,7 @@ class ItemDetailsView extends StatelessWidget {
               ),
             ),
           ),
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  const Text('Deflections'),
-                  ...item.deflection
-                      .map((deflection) => Text(deflection.toString()))
-                      .toList(),
-                ],
-              ),
-            ),
-          ),
+          DeflectionResultsCard(item.deflection),
         ],
       );
 }

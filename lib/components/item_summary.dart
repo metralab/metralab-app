@@ -16,6 +16,7 @@ class ItemSummary extends StatelessWidget {
           title: Text('Item created on ${item.birth}'),
           trailing: IconButton(
             icon: const Icon(Icons.delete),
+            tooltip: 'Delete',
             onPressed: () => context.read(itemsProvider).remove(item),
           ),
           onTap: () => onTapped(item),

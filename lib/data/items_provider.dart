@@ -5,7 +5,7 @@ import 'item.dart';
 final itemsProvider = StateNotifierProvider((_) => ItemsProvider());
 
 class ItemsProvider extends StateNotifier<List<Item>> {
-  ItemsProvider() : super([]);
+  ItemsProvider([items]) : super(items ?? []);
 
   void add(Item item) => state = [...state, item];
 

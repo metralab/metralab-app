@@ -12,8 +12,11 @@ InclinometerData inclinometerDataFactory() => InclinometerData(
       inclinationDegrees: _generator.nextDouble() * _randomSign(),
     );
 
-Item itemFactory([amount = 10]) => Item(
+Item itemFactory([amount = 8]) => Item(
       inclinometersData: [
         for (var i = 0; i < amount; i++) inclinometerDataFactory()
       ],
     );
+
+List<Item> itemCollectionFactory([amount = 5]) =>
+    [for (var i = 0; i < amount; i++) itemFactory()];

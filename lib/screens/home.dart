@@ -20,9 +20,15 @@ class HomeScreen extends StatelessWidget {
         appBar: AppBar(title: const Text('Home')),
         body: Consumer(
           builder: (context, watch, child) => watch(itemsProvider.state).isEmpty
-              ? Center(
-                  child: const Text(
-                      'Press the + icon to start a new measurement.'),
+              ? Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Center(
+                    child: Text(
+                      'Press the + icon to start measuring.',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.headline4,
+                    ),
+                  ),
                 )
               : ListView(
                   children: watch(itemsProvider.state)

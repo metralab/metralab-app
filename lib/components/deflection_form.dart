@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../data/item.dart';
 import '../data/deflection.dart';
+import 'deflection_results_card.dart';
 
 class DeflectionForm extends StatefulWidget {
   const DeflectionForm({Key key, @required this.numSensors, this.onSubmit})
@@ -26,6 +27,9 @@ class _DeflectionFormState extends State<DeflectionForm> {
   Widget build(BuildContext context) {
     distances ??= List(widget.numSensors);
     inclinations ??= List(widget.numSensors);
+    WidgetsBinding.instance.addPostFrameCallback((_) =>
+        Scrollable.ensureVisible(_resultsKey.currentContext,
+            duration: Duration(milliseconds: 500)));
     return Form(
       key: _formKey,
       child: SingleChildScrollView(
@@ -34,14 +38,17 @@ class _DeflectionFormState extends State<DeflectionForm> {
             for (int sensor = 0; sensor < widget.numSensors; sensor += 1)
               Card(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Sensor #${sensor + 1}', textAlign: TextAlign.start),
+                      Text(
+                        'Sensor ${sensor + 1}',
+                        style: Theme.of(context).textTheme.headline6,
+                      ),
                       TextFormField(
                         decoration: const InputDecoration(
-                          hintText: 'distance',
-                          helperText: 'Distance [mm]',
+                          hintText: 'distance [mm]',
                         ),
                         keyboardType: const TextInputType.numberWithOptions(
                           signed: true,
@@ -55,8 +62,7 @@ class _DeflectionFormState extends State<DeflectionForm> {
                       ),
                       TextFormField(
                         decoration: const InputDecoration(
-                          hintText: 'inclination',
-                          helperText: 'Inclination [degrees]',
+                          hintText: 'inclination [degrees]',
                         ),
                         keyboardType: const TextInputType.numberWithOptions(
                           signed: true,
@@ -87,28 +93,14 @@ class _DeflectionFormState extends State<DeflectionForm> {
                       .toList();
                   setState(() => deflection = deflectionFromInclinometers(
                       inclinometersData: inclinometersData));
-                  widget.onSubmit(Item(inclinometersData: inclinometersData));
-                  Scrollable.ensureVisible(_resultsKey.currentContext,
-                      duration: Duration(milliseconds: 500));
+                  if (widget.onSubmit != null) {
+                    widget.onSubmit(Item(inclinometersData: inclinometersData));
+                  }
                 }
               },
             ),
             if (deflection != null)
-              Card(
-                key: _resultsKey,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      const Text(
-                        'Results',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      ...deflection.map((y) => Text(y.toString())).toList()
-                    ],
-                  ),
-                ),
-              ),
+              DeflectionResultsCard(deflection, key: _resultsKey),
           ],
         ),
       ),
