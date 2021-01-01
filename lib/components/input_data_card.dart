@@ -19,42 +19,51 @@ class InputDataCard extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: Table(
-                  border: TableBorder.symmetric(inside: const BorderSide()),
-                  children: [
-                    TableRow(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('distance'),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('inclination'),
-                        ),
-                      ],
-                    ),
-                    ...inclinometersData
-                        .map(
-                          (sensor) => TableRow(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text('${sensor.distanceMillimeters} mm'),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text('${sensor.inclinationDegrees}°'),
-                              ),
-                            ],
-                          ),
-                        )
-                        .toList()
-                  ],
-                ),
+                child: _InputDataTable(inclinometersData),
               ),
             ],
           ),
         ),
+      );
+}
+
+class _InputDataTable extends StatelessWidget {
+  const _InputDataTable(this.inclinometersData, {Key key}) : super(key: key);
+
+  final List<InclinometerData> inclinometersData;
+
+  @override
+  Widget build(BuildContext context) => Table(
+        border: TableBorder.symmetric(inside: const BorderSide()),
+        children: [
+          TableRow(
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('distance'),
+              ),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Text('inclination'),
+              ),
+            ],
+          ),
+          ...inclinometersData
+              .map(
+                (sensor) => TableRow(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('${sensor.distanceMillimeters} mm'),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('${sensor.inclinationDegrees}°'),
+                    ),
+                  ],
+                ),
+              )
+              .toList()
+        ],
       );
 }

@@ -15,12 +15,12 @@ class MetralabApp extends StatefulWidget {
 }
 
 class _MetralabAppState extends State<MetralabApp> {
-  Item _selectedItem;
-  bool _newmeasurementNeeded = false;
+  Item selectedItem;
+  bool newmeasurementNeeded = false;
 
-  void _showItemDetails(Item item) => setState(() => _selectedItem = item);
+  void _showItemDetails(Item item) => setState(() => selectedItem = item);
 
-  void _createNewMeasurement() => setState(() => _newmeasurementNeeded = true);
+  void _createNewMeasurement() => setState(() => newmeasurementNeeded = true);
 
   @override
   Widget build(BuildContext context) => MaterialApp(
@@ -38,12 +38,12 @@ class _MetralabAppState extends State<MetralabApp> {
                 onActionButtonTapped: _createNewMeasurement,
               ),
             ),
-            if (_selectedItem != null)
+            if (selectedItem != null)
               MaterialPage(
-                key: ValueKey(_selectedItem),
-                child: ItemDetailsScreen(_selectedItem),
+                key: ValueKey(selectedItem),
+                child: ItemDetailsScreen(selectedItem),
               ),
-            if (_newmeasurementNeeded)
+            if (newmeasurementNeeded)
               MaterialPage(
                 key: const ValueKey('DeflectionScreen'),
                 child: NewMeasurementScreen(
@@ -55,14 +55,14 @@ class _MetralabAppState extends State<MetralabApp> {
         ),
       );
 
-  bool _onPopPage(Route route, dynamic result) {
+  bool _onPopPage(final Route route, final dynamic result) {
     if (!route.didPop(result)) {
       return false;
     }
 
     setState(() {
-      _selectedItem = null;
-      _newmeasurementNeeded = false;
+      selectedItem = null;
+      newmeasurementNeeded = false;
     });
 
     return true;

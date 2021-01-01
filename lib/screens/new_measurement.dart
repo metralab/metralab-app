@@ -83,7 +83,7 @@ class _NewMeasurementScreenState extends State<NewMeasurementScreen> {
     return null;
   }
 
-  bool _onPopPage(Route route, dynamic result) {
+  bool _onPopPage(final Route route, final dynamic result) {
     if (!route.didPop(result)) {
       return false;
     }

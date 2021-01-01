@@ -62,7 +62,7 @@ class InclinometerData {
 
 List<int> range(final int end) => [for (int i = 0; i < end; i++) i];
 
-double _radiansFromDegrees(degrees) => degrees * pi / 180.0;
+double _radiansFromDegrees(final double degrees) => degrees * pi / 180.0;
 
 List<double> _linSpace({
   final double start = 0.0,
