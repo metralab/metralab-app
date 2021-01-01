@@ -5,8 +5,11 @@ import '../data/deflection.dart';
 import 'deflection_results_card.dart';
 
 class DeflectionForm extends StatefulWidget {
-  const DeflectionForm({Key key, @required this.numSensors, this.onSubmit})
-      : super(key: key);
+  const DeflectionForm({
+    Key key,
+    this.onSubmit,
+    @required this.numSensors,
+  }) : super(key: key);
 
   final int numSensors;
   final void Function(Item) onSubmit;
@@ -27,15 +30,20 @@ class _DeflectionFormState extends State<DeflectionForm> {
   Widget build(BuildContext context) {
     distances ??= List(widget.numSensors);
     inclinations ??= List(widget.numSensors);
-    WidgetsBinding.instance.addPostFrameCallback((_) =>
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_resultsKey.currentContext != null) {
         Scrollable.ensureVisible(_resultsKey.currentContext,
-            duration: Duration(milliseconds: 500)));
+            duration: Duration(milliseconds: 500));
+      }
+    });
+
     return Form(
       key: _formKey,
       child: SingleChildScrollView(
         child: Column(
           children: [
-            for (int sensor = 0; sensor < widget.numSensors; sensor += 1)
+            for (int sensor = 0; sensor < widget.numSensors; sensor++)
               Card(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -54,10 +62,11 @@ class _DeflectionFormState extends State<DeflectionForm> {
                           signed: true,
                           decimal: true,
                         ),
-                        onChanged: (value) =>
-                            distances[sensor] = double.parse(value),
-                        validator: (value) =>
-                            value.isEmpty ? 'Please enter a distance.' : null,
+                        onChanged: (value) => setState(
+                            () => distances[sensor] = double.parse(value)),
+                        validator: (value) => value.trim().isEmpty
+                            ? 'Please enter a distance.'
+                            : null,
                         textInputAction: TextInputAction.next,
                       ),
                       TextFormField(
@@ -68,9 +77,9 @@ class _DeflectionFormState extends State<DeflectionForm> {
                           signed: true,
                           decimal: true,
                         ),
-                        onChanged: (value) =>
-                            inclinations[sensor] = double.parse(value),
-                        validator: (value) => value.isEmpty
+                        onChanged: (value) => setState(
+                            () => inclinations[sensor] = double.parse(value)),
+                        validator: (value) => value.trim().isEmpty
                             ? 'Please enter an inclination.'
                             : null,
                         textInputAction: (sensor == widget.numSensors - 1)
@@ -83,21 +92,7 @@ class _DeflectionFormState extends State<DeflectionForm> {
               ),
             ElevatedButton(
               child: const Text('Submit'),
-              onPressed: () {
-                if (_formKey.currentState.validate()) {
-                  final inclinometersData = range(widget.numSensors)
-                      .map((sensor) => InclinometerData(
-                            distanceMillimeters: distances[sensor],
-                            inclinationDegrees: inclinations[sensor],
-                          ))
-                      .toList();
-                  setState(() => deflection = deflectionFromInclinometers(
-                      inclinometersData: inclinometersData));
-                  if (widget.onSubmit != null) {
-                    widget.onSubmit(Item(inclinometersData: inclinometersData));
-                  }
-                }
-              },
+              onPressed: _submitInclinometersData,
             ),
             if (deflection != null)
               DeflectionResultsCard(deflection, key: _resultsKey),
@@ -105,5 +100,21 @@ class _DeflectionFormState extends State<DeflectionForm> {
         ),
       ),
     );
+  }
+
+  void _submitInclinometersData() {
+    if (_formKey.currentState.validate()) {
+      final inclinometersData = range(widget.numSensors)
+          .map((sensor) => InclinometerData(
+                distanceMillimeters: distances[sensor],
+                inclinationDegrees: inclinations[sensor],
+              ))
+          .toList();
+      setState(() => deflection =
+          deflectionFromInclinometers(inclinometersData: inclinometersData));
+      if (widget.onSubmit != null) {
+        widget.onSubmit(Item(inclinometersData: inclinometersData));
+      }
+    }
   }
 }
