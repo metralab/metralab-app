@@ -25,6 +25,7 @@ class _DeflectionFormState extends State<DeflectionForm> {
   List<double> distances;
   List<double> inclinations;
   List<double> deflection;
+  int numSteps;
 
   @override
   Widget build(BuildContext context) {
@@ -82,14 +83,37 @@ class _DeflectionFormState extends State<DeflectionForm> {
                         validator: (value) => value.trim().isEmpty
                             ? 'Please enter an inclination.'
                             : null,
-                        textInputAction: (sensor == widget.numSensors - 1)
-                            ? TextInputAction.done
-                            : TextInputAction.next,
+                        textInputAction: TextInputAction.next,
                       ),
                     ],
                   ),
                 ),
               ),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    Text(
+                      'Number of steps',
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        hintText: 'steps',
+                      ),
+                      keyboardType: const TextInputType.numberWithOptions(),
+                      onChanged: (value) =>
+                          setState(() => numSteps = int.parse(value)),
+                      validator: (value) => value.trim().isEmpty
+                          ? 'Please enter a number of steps.'
+                          : null,
+                      textInputAction: TextInputAction.next,
+                    ),
+                  ],
+                ),
+              ),
+            ),
             ElevatedButton(
               child: const Text('Submit'),
               onPressed: _submitInclinometersData,
@@ -110,8 +134,10 @@ class _DeflectionFormState extends State<DeflectionForm> {
                 inclinationDegrees: inclinations[sensor],
               ))
           .toList();
-      setState(() => deflection =
-          deflectionFromInclinometers(inclinometersData: inclinometersData));
+      setState(() => deflection = deflectionFromInclinometers(
+            inclinometersData: inclinometersData,
+            nSteps: numSteps,
+          ));
       if (widget.onSubmit != null) {
         widget.onSubmit(Item(inclinometersData: inclinometersData));
       }

@@ -5,26 +5,15 @@ import 'package:metralab/components/deflection_form.dart';
 void main() {
   group('A deflection form', () {
     testWidgets('shows a form', (WidgetTester tester) async {
-      await tester.pumpWidget(MaterialApp(
-        home: DeflectionForm(
-          onSubmit: (_) {},
-          numSensors: 3,
-        ),
-      ));
-
+      await tester.pumpWidget(MaterialApp(home: DeflectionForm(numSensors: 3)));
       expect(find.byType(Form), findsOneWidget);
     });
 
     testWidgets('shows a known amount of text fields for the distances',
         (WidgetTester tester) async {
       const numSensors = 5;
-      await tester.pumpWidget(MaterialApp(
-        home: DeflectionForm(
-          onSubmit: (_) {},
-          numSensors: numSensors,
-        ),
-      ));
-
+      await tester.pumpWidget(
+          MaterialApp(home: DeflectionForm(numSensors: numSensors)));
       expect(
           find.byWidgetPredicate((widget) =>
               widget is TextField &&
@@ -35,13 +24,8 @@ void main() {
     testWidgets('shows a known amount of text fields for the inclinations',
         (WidgetTester tester) async {
       const numSensors = 6;
-      await tester.pumpWidget(MaterialApp(
-        home: DeflectionForm(
-          onSubmit: (_) {},
-          numSensors: numSensors,
-        ),
-      ));
-
+      await tester.pumpWidget(
+          MaterialApp(home: DeflectionForm(numSensors: numSensors)));
       expect(
           find.byWidgetPredicate((widget) =>
               widget is TextField &&
@@ -49,14 +33,18 @@ void main() {
           findsNWidgets(numSensors));
     });
 
-    testWidgets('shows a "submit" button', (WidgetTester tester) async {
-      await tester.pumpWidget(MaterialApp(
-        home: DeflectionForm(
-          onSubmit: (_) {},
-          numSensors: 3,
-        ),
-      ));
+    testWidgets('shows a text field for the number of steps',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(home: DeflectionForm(numSensors: 4)));
+      expect(
+          find.byWidgetPredicate((widget) =>
+              widget is TextField &&
+              widget.decoration.hintText.startsWith('steps')),
+          findsOneWidget);
+    });
 
+    testWidgets('shows a "submit" button', (WidgetTester tester) async {
+      await tester.pumpWidget(MaterialApp(home: DeflectionForm(numSensors: 3)));
       expect(find.widgetWithText(ElevatedButton, 'Submit'), findsOneWidget);
     });
   });
