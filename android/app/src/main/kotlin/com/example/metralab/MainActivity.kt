@@ -1,4 +1,4 @@
-package com.example.metralab
+package com.metralab.app
 
 import io.flutter.embedding.android.FlutterActivity
 
