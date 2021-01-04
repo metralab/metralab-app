@@ -1,0 +1,4 @@
+jobs:
+  build:
+    steps:
+      - run: docker build -t metralab-cicd .
