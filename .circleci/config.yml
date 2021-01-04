@@ -1,4 +1,13 @@
 jobs:
   build:
+    docker:
+      - image: ggiuffre/metralab-cicd
     steps:
-      - run: docker build -t metralab-cicd .
+      - checkout
+      - run: cd /metralab
+      - run: flutter build appbundle
+      - run: flutter channel beta
+      - run: flutter upgrade
+      - run: flutter config --enable-web
+      - run: flutter create .
+      - run: flutter build web
