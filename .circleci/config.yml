@@ -4,7 +4,6 @@ jobs:
       - image: cimg/node:14.10.1
     steps:
       - checkout
-      - run: cd /metralab-app
       - run: docker build -t metralab-cicd .
       # - run: flutter build appbundle
       # - run: flutter channel beta
