@@ -25,6 +25,9 @@ dependencies:
     sdk: flutter
   flutter_sparkline: ^0.1.0
   linalg: ^0.3.2
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.16.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -48,6 +51,9 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  # The following line adds code generation (synthetic package) support.
+  generate: true
 
   # To add assets to your application, add an assets section, like this:
   # assets:

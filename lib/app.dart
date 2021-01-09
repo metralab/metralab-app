@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'data/items_provider.dart';
@@ -24,11 +25,13 @@ class _MetralabAppState extends State<MetralabApp> {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-        title: 'Scout',
+        title: 'Metralab',
         theme: ThemeData(
           primarySwatch: Colors.indigo,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: Navigator(
           pages: [
             MaterialPage(

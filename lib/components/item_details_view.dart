@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../data/item.dart';
 import 'deflection_results_card.dart';
@@ -15,7 +16,9 @@ class ItemDetailsView extends StatelessWidget {
           Card(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text('creation date: ${item.birth}'),
+              child: Text(AppLocalizations.of(context).creationDate +
+                  ': ' +
+                  item.birth.toString()),
             ),
           ),
           DeflectionResultsCard(item.deflection),

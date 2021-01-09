@@ -1,0 +1,117 @@
+{
+  "@@locale": "en",
+
+  "calculateDeflection": "Calculate deflection",
+  "@calculateDeflection": {
+    "description": "heading for calculating a deflection"
+  },
+  "chooseAnItemOnTheLeft": "Choose an item on the left.",
+  "@chooseAnItemOnTheLeft": {
+    "description": "prompt to choose an item from a list on the left"
+  },
+  "creationDate": "creation date",
+  "@creationDate": {
+    "description": "label for the date when something was created"
+  },
+  "detailsScreenIntroduction": "Press the + icon. Once you have taken a measurement, come back here to see details about the results.",
+  "@detailsScreenIntroduction": {
+    "description": "explanation about the master-detail home screen"
+  },
+  "degrees": "degrees",
+  "@degrees": {
+    "description": "degrees"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "option to delete something"
+  },
+  "distance": "distance",
+  "@distance": {
+    "description": "distance"
+  },
+  "enterDistance": "Please enter a distance.",
+  "@enterDistance": {
+    "description": "Prompt to enter a distance"
+  },
+  "enterInclination": "Please enter an inclination.",
+  "@enterInclination": {
+    "description": "Prompt to enter an inclination"
+  },
+  "enterNumSteps": "Please enter a number of steps.",
+  "@enterNumSteps": {
+    "description": "Prompt to enter a number of steps"
+  },
+  "enterValue": "Please enter a value.",
+  "@enterValue": {
+    "description": "Prompt to enter a value"
+  },
+  "enterNumber": "Please enter a number.",
+  "@enterNumber": {
+    "description": "Prompt to enter a number"
+  },
+  "enterNumberGreaterThan": "Please enter a number greater than {number}.",
+  "@enterNumberGreaterThan": {
+    "description": "Prompt to enter a number greater than a certain value",
+    "placeholders": {
+      "number": {}
+    }
+  },
+  "inclination": "inclination",
+  "@inclination": {
+    "description": "inclination"
+  },
+  "inclinometer": "inclinometer",
+  "@inclinometer": {
+    "description": "instrument that measures inclinations"
+  },
+  "inputData": "Input data",
+  "@inputData": {
+    "description": "label for the input data to a measurement"
+  },
+  "itemSummary": "Item created on {creationDate}",
+  "@itemSummary": {
+    "description": "summary of an item",
+    "placeholders" : {
+      "creationDate": {
+        "type": "DateTime",
+        "format": "yMd"
+      }
+    }
+  },
+  "itemDetails": "Item details",
+  "@itemDetails": {
+    "description": "option to see the details of an item"
+  },
+  "measurementIconPrompt": "Press the + icon to start measuring.",
+  "@measurementIconPrompt": {
+    "description": "option to take a new measurement"
+  },
+  "newMeasurement": "New measurement",
+  "@newMeasurement": {
+    "description": "option to take a new measurement"
+  },
+  "numInclinometers": "Number of inclinometers",
+  "@numInclinometers": {
+    "description": "option to specify a number of inclinometers"
+  },
+  "numSteps": "Number of steps",
+  "@numSteps": {
+    "description": "option to specify a number of steps"
+  },
+  "results": "results",
+  "@results": {
+    "description": "heading for the results of a measurement"
+  },
+  "sensor": "sensor",
+  "@sensor": {
+    "description": "sensor"
+  },
+  "steps": "steps",
+  "@steps": {
+    "description": "steps (unclear...)"
+  },
+  "submit": "Submit",
+  "@submit": {
+    "description": "option to submit a form"
+  }
+}

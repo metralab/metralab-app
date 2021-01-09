@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_sparkline/flutter_sparkline.dart';
+import 'package:intl/intl.dart';
 
 class DeflectionResultsCard extends StatelessWidget {
   const DeflectionResultsCard(this.deflection, {Key key}) : super(key: key);
@@ -12,7 +14,10 @@ class DeflectionResultsCard extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              Text('Results', style: Theme.of(context).textTheme.headline5),
+              Text(
+                  toBeginningOfSentenceCase(
+                      AppLocalizations.of(context).results),
+                  style: Theme.of(context).textTheme.headline5),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Column(

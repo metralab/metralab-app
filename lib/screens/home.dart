@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../components/item_details_view.dart';
@@ -25,7 +26,7 @@ class HomeScreen extends StatelessWidget {
                 : _CompactHomeScreen(onItemTapped: onItemTapped)),
         floatingActionButton: FloatingActionButton(
           onPressed: onActionButtonTapped,
-          tooltip: 'New measurement',
+          tooltip: AppLocalizations.of(context).newMeasurement,
           child: const Icon(Icons.add),
         ),
       );
@@ -47,11 +48,6 @@ class _WideHomeScreen extends StatefulWidget {
 }
 
 class _WideHomeScreenState extends State<_WideHomeScreen> {
-  static const detailsEmptyHint = 'Choose an item on the left.';
-  static const detailsScreenIntroduction =
-      'Press the + icon. Once you have taken a measurement, come back '
-      'here to see details about the results.';
-
   Item selectedItem;
 
   @override
@@ -73,12 +69,14 @@ class _WideHomeScreenState extends State<_WideHomeScreen> {
                         builder: (context, watch, child) =>
                             watch(itemsProvider.state).isEmpty
                                 ? Text(
-                                    detailsScreenIntroduction,
+                                    AppLocalizations.of(context)
+                                        .detailsScreenIntroduction,
                                     style:
                                         Theme.of(context).textTheme.headline5,
                                   )
                                 : Text(
-                                    detailsEmptyHint,
+                                    AppLocalizations.of(context)
+                                        .chooseAnItemOnTheLeft,
                                     style:
                                         Theme.of(context).textTheme.headline5,
                                   ),
@@ -103,7 +101,7 @@ class _ItemsList extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Center(
                   child: Text(
-                    'Press the + icon to start measuring.',
+                    AppLocalizations.of(context).measurementIconPrompt,
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headline4,
                   ),

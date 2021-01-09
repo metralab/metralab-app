@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/items_provider.dart';
@@ -13,10 +14,10 @@ class ItemSummary extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Card(
         child: ListTile(
-          title: Text('Item created on ${item.birth}'),
+          title: Text(AppLocalizations.of(context).itemSummary(item.birth)),
           trailing: IconButton(
             icon: const Icon(Icons.delete),
-            tooltip: 'Delete',
+            tooltip: AppLocalizations.of(context).delete,
             onPressed: () => context.read(itemsProvider).remove(item),
           ),
           onTap: () => onTapped(item),
