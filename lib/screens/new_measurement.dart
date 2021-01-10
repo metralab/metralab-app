@@ -37,7 +37,7 @@ class _NewMeasurementScreenState extends State<NewMeasurementScreen> {
                         textAlign: TextAlign.start,
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
                         child: TextFormField(
                           keyboardType: const TextInputType.numberWithOptions(),
                           onChanged: (value) =>

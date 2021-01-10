@@ -13,7 +13,7 @@ class ItemDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(title: Text(tr('itemDetails'))),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: ItemDetailsView(item),
         ),
       );

@@ -117,9 +117,12 @@ class _DeflectionFormState extends State<DeflectionForm> {
                 ),
               ),
             ),
-            ElevatedButton(
-              child: Text(tr('submit')),
-              onPressed: _submitInclinometersData,
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ElevatedButton(
+                child: Text(tr('submit')),
+                onPressed: _submitInclinometersData,
+              ),
             ),
             if (deflection != null)
               DeflectionResultsCard(deflection, key: _resultsKey),

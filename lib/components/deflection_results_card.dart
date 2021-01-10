@@ -11,7 +11,7 @@ class DeflectionResultsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Card(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
               Text(toBeginningOfSentenceCase(tr('results')),

@@ -15,7 +15,7 @@ class ItemDetailsView extends StatelessWidget {
         children: [
           Card(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(16.0),
               child: Text('${tr('creationDate')}: ${item.birth}'),
             ),
           ),

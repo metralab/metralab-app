@@ -11,7 +11,7 @@ class InputDataCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Card(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
               Text(
@@ -40,11 +40,11 @@ class _InputDataTable extends StatelessWidget {
           TableRow(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Text(tr('distance')),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Text(tr('inclination')),
               ),
             ],
@@ -54,11 +54,11 @@ class _InputDataTable extends StatelessWidget {
                 (sensor) => TableRow(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(16.0),
                       child: Text('${sensor.distanceMillimeters} mm'),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(16.0),
                       child: Text('${sensor.inclinationDegrees}°'),
                     ),
                   ],
