@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/deflection_form.dart';
 import '../data/item.dart';
@@ -20,8 +20,7 @@ class _NewMeasurementScreenState extends State<NewMeasurementScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(
-            title: Text(AppLocalizations.of(context).calculateDeflection)),
+        appBar: AppBar(title: Text(tr('calculateDeflection'))),
         body: Navigator(
           pages: [
             MaterialPage(
@@ -33,7 +32,7 @@ class _NewMeasurementScreenState extends State<NewMeasurementScreen> {
                   child: ListView(
                     children: [
                       Text(
-                        AppLocalizations.of(context).numInclinometers,
+                        tr('numInclinometers'),
                         style: Theme.of(context).textTheme.headline6,
                         textAlign: TextAlign.start,
                       ),
@@ -45,7 +44,7 @@ class _NewMeasurementScreenState extends State<NewMeasurementScreen> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
                       ElevatedButton(
-                        child: Text(AppLocalizations.of(context).submit),
+                        child: Text(tr('submit')),
                         onPressed: () {
                           if (_formKey.currentState.validate()) {
                             setState(() => numSensorsSubmitted = true);
@@ -70,16 +69,16 @@ class _NewMeasurementScreenState extends State<NewMeasurementScreen> {
 
   String _validateNumberOfInclinometers(final String value) {
     if (value.trim().isEmpty) {
-      return AppLocalizations.of(context).enterValue;
+      return tr('enterValue');
     }
 
     final computedValue = int.tryParse(value);
     if (computedValue == null) {
-      return AppLocalizations.of(context).enterNumber;
+      return tr('enterNumber');
     }
 
     if (computedValue <= 2) {
-      return AppLocalizations.of(context).enterNumberGreaterThan(2);
+      return tr('enterNumberGreaterThan', args: ['2']);
     }
 
     return null;

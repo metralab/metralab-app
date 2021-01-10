@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../components/item_details_view.dart';
@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
                 : _CompactHomeScreen(onItemTapped: onItemTapped)),
         floatingActionButton: FloatingActionButton(
           onPressed: onActionButtonTapped,
-          tooltip: AppLocalizations.of(context).newMeasurement,
+          tooltip: tr('newMeasurement'),
           child: const Icon(Icons.add),
         ),
       );
@@ -69,14 +69,12 @@ class _WideHomeScreenState extends State<_WideHomeScreen> {
                         builder: (context, watch, child) =>
                             watch(itemsProvider.state).isEmpty
                                 ? Text(
-                                    AppLocalizations.of(context)
-                                        .detailsScreenIntroduction,
+                                    tr('detailsScreenIntroduction'),
                                     style:
                                         Theme.of(context).textTheme.headline5,
                                   )
                                 : Text(
-                                    AppLocalizations.of(context)
-                                        .chooseAnItemOnTheLeft,
+                                    tr('chooseAnItemOnTheLeft'),
                                     style:
                                         Theme.of(context).textTheme.headline5,
                                   ),
@@ -101,7 +99,7 @@ class _ItemsList extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Center(
                   child: Text(
-                    AppLocalizations.of(context).measurementIconPrompt,
+                    tr('measurementIconPrompt'),
                     textAlign: TextAlign.center,
                     style: Theme.of(context).textTheme.headline4,
                   ),

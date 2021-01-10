@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../components/item_details_view.dart';
 import '../data/item.dart';
@@ -11,7 +11,7 @@ class ItemDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: Text(AppLocalizations.of(context).itemDetails)),
+        appBar: AppBar(title: Text(tr('itemDetails'))),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ItemDetailsView(item),

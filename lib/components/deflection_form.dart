@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../data/item.dart';
 import '../data/deflection.dart';
@@ -53,13 +53,12 @@ class _DeflectionFormState extends State<DeflectionForm> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '${AppLocalizations.of(context).sensor} ${sensor + 1}',
+                        '${tr('sensor')} ${sensor + 1}',
                         style: Theme.of(context).textTheme.headline6,
                       ),
                       TextFormField(
                         decoration: InputDecoration(
-                          hintText:
-                              '${AppLocalizations.of(context).distance} [mm]',
+                          hintText: '${tr('distance')} [mm]',
                         ),
                         keyboardType: const TextInputType.numberWithOptions(
                           signed: true,
@@ -67,15 +66,13 @@ class _DeflectionFormState extends State<DeflectionForm> {
                         ),
                         onChanged: (value) => setState(
                             () => distances[sensor] = double.parse(value)),
-                        validator: (value) => value.trim().isEmpty
-                            ? AppLocalizations.of(context).enterDistance
-                            : null,
+                        validator: (value) =>
+                            value.trim().isEmpty ? tr('enterDistance') : null,
                         textInputAction: TextInputAction.next,
                       ),
                       TextFormField(
                         decoration: InputDecoration(
-                          hintText: AppLocalizations.of(context).inclination +
-                              ' [${AppLocalizations.of(context).degrees}]',
+                          hintText: '${tr('inclination')} [${tr('degrees')}]',
                         ),
                         keyboardType: const TextInputType.numberWithOptions(
                           signed: true,
@@ -84,7 +81,7 @@ class _DeflectionFormState extends State<DeflectionForm> {
                         onChanged: (value) => setState(
                             () => inclinations[sensor] = double.parse(value)),
                         validator: (value) => value.trim().isEmpty
-                            ? AppLocalizations.of(context).enterInclination
+                            ? tr('enterInclination')
                             : null,
                         textInputAction: TextInputAction.next,
                       ),
@@ -98,19 +95,18 @@ class _DeflectionFormState extends State<DeflectionForm> {
                 child: Column(
                   children: [
                     Text(
-                      AppLocalizations.of(context).numSteps,
+                      tr('numSteps'),
                       style: Theme.of(context).textTheme.headline6,
                     ),
                     TextFormField(
                       decoration: InputDecoration(
-                        hintText: AppLocalizations.of(context).steps,
+                        hintText: tr('steps'),
                       ),
                       keyboardType: const TextInputType.numberWithOptions(),
                       onChanged: (value) =>
                           setState(() => numSteps = int.parse(value)),
-                      validator: (value) => value.trim().isEmpty
-                          ? AppLocalizations.of(context).enterNumSteps
-                          : null,
+                      validator: (value) =>
+                          value.trim().isEmpty ? tr('enterNumSteps') : null,
                       textInputAction: TextInputAction.next,
                     ),
                   ],
@@ -118,7 +114,7 @@ class _DeflectionFormState extends State<DeflectionForm> {
               ),
             ),
             ElevatedButton(
-              child: Text(AppLocalizations.of(context).submit),
+              child: Text(tr('submit')),
               onPressed: _submitInclinometersData,
             ),
             if (deflection != null)

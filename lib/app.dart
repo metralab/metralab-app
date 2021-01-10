@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'data/items_provider.dart';
@@ -30,8 +30,9 @@ class _MetralabAppState extends State<MetralabApp> {
           primarySwatch: Colors.indigo,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
         home: Navigator(
           pages: [
             MaterialPage(

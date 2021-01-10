@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../data/deflection.dart';
 
@@ -15,7 +15,7 @@ class InputDataCard extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                AppLocalizations.of(context).inputData,
+                tr('inputData'),
                 style: Theme.of(context).textTheme.headline5,
               ),
               Padding(
@@ -41,11 +41,11 @@ class _InputDataTable extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(AppLocalizations.of(context).distance),
+                child: Text(tr('distance')),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text(AppLocalizations.of(context).inclination),
+                child: Text(tr('inclination')),
               ),
             ],
           ),
