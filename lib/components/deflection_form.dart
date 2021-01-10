@@ -27,6 +27,7 @@ class _DeflectionFormState extends State<DeflectionForm> {
   List<double> inclinations;
   List<double> deflection;
   int numSteps;
+  bool calculationError = false;
 
   @override
   Widget build(BuildContext context) {
@@ -124,7 +125,26 @@ class _DeflectionFormState extends State<DeflectionForm> {
                 onPressed: _submitInclinometersData,
               ),
             ),
-            if (deflection != null)
+            if (calculationError)
+              Card(
+                color: Theme.of(context).errorColor.withOpacity(0.25),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          tr('calculationError'),
+                          key: _resultsKey,
+                        ),
+                      ),
+                      const Icon(Icons.error),
+                    ],
+                  ),
+                ),
+              ),
+            if (!calculationError && deflection != null)
               DeflectionResultsCard(deflection, key: _resultsKey),
           ],
         ),
@@ -145,9 +165,16 @@ class _DeflectionFormState extends State<DeflectionForm> {
         nSteps: numSteps,
       );
       setState(() {
-        deflection = newItem.deflection;
-        if (widget.onSubmit != null) {
-          widget.onSubmit(newItem);
+        try {
+          deflection = newItem.deflection;
+          print('all fine');
+          calculationError = false;
+          if (widget.onSubmit != null) {
+            widget.onSubmit(newItem);
+          }
+        } catch (e) {
+          print('calculation error');
+          calculationError = true;
         }
       });
     }

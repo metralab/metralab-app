@@ -1,4 +1,5 @@
 {
+    "calculationError": "Non è stato possibile calcolare il risultato per via di un errore numerico. Controlla che i dati di input non contengano un refuso.",
     "calculateDeflection": "Calcolo deformata",
     "chooseAnItemOnTheLeft": "Seleziona un elemento a sinistra.",
     "creationDate": "data di creazione",

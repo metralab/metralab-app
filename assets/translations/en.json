@@ -1,4 +1,5 @@
 {
+    "calculationError": "The result could not be computed because an error occurred during the calculation. Please check your input data for mistakes.",
     "calculateDeflection": "Calculate deflection",
     "chooseAnItemOnTheLeft": "Choose an item on the left.",
     "creationDate": "creation date",
