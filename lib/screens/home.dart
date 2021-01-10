@@ -55,9 +55,14 @@ class _WideHomeScreenState extends State<_WideHomeScreen> {
   Widget build(BuildContext context) => Row(
         children: [
           Container(
-            width: 300,
+            width: 330,
             child: _ItemsList(
-                onItemTapped: (item) => setState(() => selectedItem = item)),
+              onItemTapped: (item) => setState(() => selectedItem = item),
+              onItemDeleted: (item) => setState(() {
+                selectedItem = null;
+                context.read(itemsProvider).remove(item);
+              }),
+            ),
           ),
           const VerticalDivider(),
           Expanded(
@@ -89,9 +94,14 @@ class _WideHomeScreenState extends State<_WideHomeScreen> {
 }
 
 class _ItemsList extends StatelessWidget {
-  const _ItemsList({Key key, @required this.onItemTapped}) : super(key: key);
+  const _ItemsList({
+    Key key,
+    @required this.onItemTapped,
+    this.onItemDeleted,
+  }) : super(key: key);
 
   final void Function(Item) onItemTapped;
+  final void Function(Item) onItemDeleted;
 
   @override
   Widget build(BuildContext context) => Consumer(
@@ -108,7 +118,13 @@ class _ItemsList extends StatelessWidget {
               )
             : ListView(
                 children: watch(itemsProvider.state)
-                    .map((item) => ItemSummary(item, onTapped: onItemTapped))
+                    .map((item) => ItemSummary(
+                          item,
+                          onTapped: onItemTapped,
+                          onDelete: onItemDeleted != null
+                              ? () => onItemDeleted(item)
+                              : null,
+                        ))
                     .toList(),
               ),
       );

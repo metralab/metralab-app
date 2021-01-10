@@ -11,11 +11,13 @@ class ItemSummary extends StatelessWidget {
     Key key,
     @required this.onTapped,
     this.selected = false,
+    this.onDelete,
   }) : super(key: key);
 
   final Item item;
   final bool selected;
   final void Function(Item) onTapped;
+  final void Function() onDelete;
 
   @override
   Widget build(BuildContext context) => Card(
@@ -25,7 +27,8 @@ class ItemSummary extends StatelessWidget {
           trailing: IconButton(
             icon: const Icon(Icons.delete),
             tooltip: tr('delete'),
-            onPressed: () => context.read(itemsProvider).remove(item),
+            onPressed:
+                onDelete ?? () => context.read(itemsProvider).remove(item),
           ),
           onTap: () => onTapped(item),
         ),
