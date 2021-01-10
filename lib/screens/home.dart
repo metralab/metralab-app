@@ -21,9 +21,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(title: const Text('Home')),
         body: LayoutBuilder(
-            builder: (context, constraints) => constraints.maxWidth > 768
-                ? _WideHomeScreen()
-                : _CompactHomeScreen(onItemTapped: onItemTapped)),
+          builder: (context, constraints) => constraints.maxWidth > 768
+              ? _WideHomeScreen()
+              : _CompactHomeScreen(onItemTapped: onItemTapped),
+        ),
         floatingActionButton: FloatingActionButton(
           onPressed: onActionButtonTapped,
           tooltip: tr('newMeasurement'),
@@ -58,13 +59,13 @@ class _WideHomeScreenState extends State<_WideHomeScreen> {
             child: _ItemsList(
                 onItemTapped: (item) => setState(() => selectedItem = item)),
           ),
-          VerticalDivider(),
+          const VerticalDivider(),
           Expanded(
             child: selectedItem == null
                 ? Center(
                     child: Container(
                       padding: const EdgeInsets.all(16.0),
-                      constraints: BoxConstraints(maxWidth: 400.0),
+                      constraints: const BoxConstraints(maxWidth: 400.0),
                       child: Consumer(
                         builder: (context, watch, child) =>
                             watch(itemsProvider.state).isEmpty
