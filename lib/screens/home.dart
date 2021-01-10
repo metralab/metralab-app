@@ -62,6 +62,7 @@ class _WideHomeScreenState extends State<_WideHomeScreen> {
                 selectedItem = null;
                 context.read(itemsProvider).remove(item);
               }),
+              selectedItem: selectedItem,
             ),
           ),
           const VerticalDivider(),
@@ -98,10 +99,12 @@ class _ItemsList extends StatelessWidget {
     Key key,
     @required this.onItemTapped,
     this.onItemDeleted,
+    this.selectedItem,
   }) : super(key: key);
 
   final void Function(Item) onItemTapped;
   final void Function(Item) onItemDeleted;
+  final Item selectedItem;
 
   @override
   Widget build(BuildContext context) => Consumer(
@@ -120,7 +123,8 @@ class _ItemsList extends StatelessWidget {
                 children: watch(itemsProvider.state)
                     .map((item) => ItemSummary(
                           item,
-                          onTapped: onItemTapped,
+                          selected: item == selectedItem,
+                          onTap: onItemTapped,
                           onDelete: onItemDeleted != null
                               ? () => onItemDeleted(item)
                               : null,

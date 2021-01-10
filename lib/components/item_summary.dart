@@ -9,14 +9,14 @@ class ItemSummary extends StatelessWidget {
   const ItemSummary(
     this.item, {
     Key key,
-    @required this.onTapped,
+    @required this.onTap,
     this.selected = false,
     this.onDelete,
   }) : super(key: key);
 
   final Item item;
   final bool selected;
-  final void Function(Item) onTapped;
+  final void Function(Item) onTap;
   final void Function() onDelete;
 
   @override
@@ -30,7 +30,7 @@ class ItemSummary extends StatelessWidget {
             onPressed:
                 onDelete ?? () => context.read(itemsProvider).remove(item),
           ),
-          onTap: () => onTapped(item),
+          onTap: () => onTap(item),
         ),
       );
 }
