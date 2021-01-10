@@ -16,6 +16,7 @@ Item itemFactory([amount = 8]) => Item(
       inclinometersData: [
         for (var i = 0; i < amount; i++) inclinometerDataFactory()
       ],
+      nSteps: 10 + _generator.nextInt(4),
     );
 
 List<Item> itemCollectionFactory([amount = 5]) =>
