@@ -36,12 +36,15 @@ class _NewMeasurementScreenState extends State<NewMeasurementScreen> {
                         style: Theme.of(context).textTheme.headline6,
                         textAlign: TextAlign.start,
                       ),
-                      TextFormField(
-                        keyboardType: const TextInputType.numberWithOptions(),
-                        onChanged: (value) =>
-                            setState(() => numSensors = int.parse(value)),
-                        validator: _validateNumberOfInclinometers,
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: TextFormField(
+                          keyboardType: const TextInputType.numberWithOptions(),
+                          onChanged: (value) =>
+                              setState(() => numSensors = int.parse(value)),
+                          validator: _validateNumberOfInclinometers,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                        ),
                       ),
                       ElevatedButton(
                         child: Text(tr('submit')),

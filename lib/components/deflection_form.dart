@@ -58,7 +58,8 @@ class _DeflectionFormState extends State<DeflectionForm> {
                       ),
                       TextFormField(
                         decoration: InputDecoration(
-                          hintText: '${tr('distance')} [mm]',
+                          hintText: tr('distance'),
+                          suffixText: 'mm',
                         ),
                         keyboardType: const TextInputType.numberWithOptions(
                           signed: true,
@@ -69,10 +70,12 @@ class _DeflectionFormState extends State<DeflectionForm> {
                         validator: (value) =>
                             value.trim().isEmpty ? tr('enterDistance') : null,
                         textInputAction: TextInputAction.next,
+                        autocorrect: false,
                       ),
                       TextFormField(
                         decoration: InputDecoration(
-                          hintText: '${tr('inclination')} [${tr('degrees')}]',
+                          hintText: tr('inclination'),
+                          suffixText: tr('degrees'),
                         ),
                         keyboardType: const TextInputType.numberWithOptions(
                           signed: true,
@@ -84,6 +87,7 @@ class _DeflectionFormState extends State<DeflectionForm> {
                             ? tr('enterInclination')
                             : null,
                         textInputAction: TextInputAction.next,
+                        autocorrect: false,
                       ),
                     ],
                   ),
