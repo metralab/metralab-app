@@ -137,18 +137,16 @@ class _DeflectionFormState extends State<DeflectionForm> {
                 inclinationDegrees: inclinations[sensor],
               ))
           .toList();
-      setState(() => deflection = deflectionFromInclinometers(
-            inclinometersData: inclinometersData,
-            nSteps: numSteps,
-          ));
-      if (widget.onSubmit != null) {
-        widget.onSubmit(
-          Item(
-            inclinometersData: inclinometersData,
-            nSteps: numSteps,
-          ),
-        );
-      }
+      final newItem = Item(
+        inclinometersData: inclinometersData,
+        nSteps: numSteps,
+      );
+      setState(() {
+        deflection = newItem.deflection;
+        if (widget.onSubmit != null) {
+          widget.onSubmit(newItem);
+        }
+      });
     }
   }
 }
