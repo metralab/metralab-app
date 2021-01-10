@@ -142,7 +142,12 @@ class _DeflectionFormState extends State<DeflectionForm> {
             nSteps: numSteps,
           ));
       if (widget.onSubmit != null) {
-        widget.onSubmit(Item(inclinometersData: inclinometersData));
+        widget.onSubmit(
+          Item(
+            inclinometersData: inclinometersData,
+            nSteps: numSteps,
+          ),
+        );
       }
     }
   }
