@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -14,9 +16,28 @@ class NewMeasurementScreen extends StatefulWidget {
 }
 
 class _NewMeasurementScreenState extends State<NewMeasurementScreen> {
+  static const defaultNumSensors = 7;
   final _formKey = GlobalKey<FormState>();
-  int numSensors;
+  final _textFieldController = TextEditingController();
+
+  int numSensors = defaultNumSensors;
   bool numSensorsSubmitted = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _textFieldController.value =
+        TextEditingValue(text: defaultNumSensors.toString());
+    _textFieldController.addListener(() {
+      numSensors = int.tryParse(_textFieldController.text);
+    });
+  }
+
+  @override
+  void dispose() {
+    _textFieldController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -38,12 +59,28 @@ class _NewMeasurementScreenState extends State<NewMeasurementScreen> {
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 16.0),
-                        child: TextFormField(
-                          keyboardType: const TextInputType.numberWithOptions(),
-                          onChanged: (value) =>
-                              setState(() => numSensors = int.parse(value)),
-                          validator: _validateNumberOfInclinometers,
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                        child: Row(
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.remove),
+                              onPressed: () => _changeNumSensors(-1),
+                            ),
+                            Flexible(
+                              child: TextFormField(
+                                controller: _textFieldController,
+                                textAlign: TextAlign.center,
+                                keyboardType:
+                                    const TextInputType.numberWithOptions(),
+                                validator: _validateNumberOfInclinometers,
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                              ),
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.add),
+                              onPressed: () => _changeNumSensors(1),
+                            ),
+                          ],
                         ),
                       ),
                       ElevatedButton(
@@ -69,6 +106,13 @@ class _NewMeasurementScreenState extends State<NewMeasurementScreen> {
           onPopPage: _onPopPage,
         ),
       );
+
+  void _changeNumSensors(final int valueToAdd) {
+    final currentValue = int.tryParse(_textFieldController.text) ?? 0;
+    final text = max(0, currentValue + valueToAdd);
+    _textFieldController.value =
+        _textFieldController.value.copyWith(text: text.toString());
+  }
 
   String _validateNumberOfInclinometers(final String value) {
     if (value.trim().isEmpty) {
