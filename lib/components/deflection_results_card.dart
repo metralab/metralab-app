@@ -18,8 +18,9 @@ class DeflectionResultsCard extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline5),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
-                child: Column(
-                  children: deflection.map((y) => Text(y.toString())).toList(),
+                child: SelectableText(
+                  deflection.join('\n'),
+                  textAlign: TextAlign.center,
                 ),
               ),
               Padding(
