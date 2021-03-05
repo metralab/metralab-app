@@ -31,8 +31,8 @@ class _DeflectionFormState extends State<DeflectionForm> {
 
   @override
   Widget build(BuildContext context) {
-    distances ??= List(widget.numSensors);
-    inclinations ??= List(widget.numSensors);
+    distances ??= List.filled(widget.numSensors, 0.0);
+    inclinations ??= List.filled(widget.numSensors, 0.0);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_resultsKey.currentContext != null) {
@@ -121,8 +121,8 @@ class _DeflectionFormState extends State<DeflectionForm> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
-                child: Text(tr('submit')),
                 onPressed: _submitInclinometersData,
+                child: Text(tr('submit')),
               ),
             ),
             if (calculationError)
@@ -167,13 +167,11 @@ class _DeflectionFormState extends State<DeflectionForm> {
       setState(() {
         try {
           deflection = newItem.deflection;
-          print('all fine');
           calculationError = false;
           if (widget.onSubmit != null) {
             widget.onSubmit(newItem);
           }
         } catch (e) {
-          print('calculation error');
           calculationError = true;
         }
       });

@@ -84,12 +84,12 @@ class _NewMeasurementScreenState extends State<NewMeasurementScreen> {
                         ),
                       ),
                       ElevatedButton(
-                        child: Text(tr('submit')),
                         onPressed: () {
                           if (_formKey.currentState.validate()) {
                             setState(() => numSensorsSubmitted = true);
                           }
                         },
+                        child: Text(tr('submit')),
                       ),
                     ],
                   ),
