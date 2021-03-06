@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:metralab/components/item_details_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -6,8 +7,13 @@ import '../factories.dart';
 import '../utilities.dart';
 
 void main() {
+  EasyLocalization.logger.enableBuildModes = [];
+
   group('An item details view', () {
-    setUp(() => SharedPreferences.setMockInitialValues({}));
+    setUp(() async {
+      SharedPreferences.setMockInitialValues({});
+      await EasyLocalization.ensureInitialized();
+    });
 
     testWidgets('shows the date of creation of the item',
         (WidgetTester tester) async {

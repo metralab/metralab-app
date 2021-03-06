@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:metralab/screens/new_measurement.dart';
@@ -6,7 +7,11 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../utilities.dart';
 
 void main() {
+  EasyLocalization.logger.enableBuildModes = [];
+
   group('The "New Measurement" screen', () {
+    setUp(() async => EasyLocalization.ensureInitialized());
+
     testWidgets('shows a form', (WidgetTester tester) async {
       SharedPreferences.setMockInitialValues({});
       await tester.runAsync(() async {

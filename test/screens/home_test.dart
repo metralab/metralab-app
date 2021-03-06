@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -11,7 +12,11 @@ import '../factories.dart';
 import '../utilities.dart';
 
 void main() {
+  EasyLocalization.logger.enableBuildModes = [];
+
   group('The home screen', () {
+    setUp(() async => EasyLocalization.ensureInitialized());
+
     testWidgets('shows a button', (WidgetTester tester) async {
       SharedPreferences.setMockInitialValues({});
       await tester.pumpWidget(
