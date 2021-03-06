@@ -1,20 +1,8 @@
 FROM cirrusci/flutter
 
-# # variables
-# ARG DEBIAN_FRONTEND=noninteractive
-# ENV ANDROID_SDK_ROOT="/home/android"
-# ENV PATH="$PATH:/flutter/bin:$ANDROID_SDK_ROOT/cmdline-tools/tools/bin"
-
-# # dependencies (alpine: apk add bash curl file git zip ruby-full npm)
-# RUN apt-get update && apt-get install -y tzdata
-# RUN apt-get install -y curl git zip openjdk-8-jdk openssh-server
-# RUN curl -o android_tools.zip https://dl.google.com/android/repository/commandlinetools-linux-6200805_latest.zip
-# RUN unzip -qq -d $ANDROID_SDK_ROOT android_tools.zip && rm android_tools.zip
-# RUN mkdir -p $ANDROID_SDK_ROOT/cmdline-tools
-# RUN mv $ANDROID_SDK_ROOT/tools $ANDROID_SDK_ROOT/cmdline-tools/tools
-# RUN yes "y" | sdkmanager "build-tools;30.0.0"
-# RUN git clone https://github.com/flutter/flutter.git
+# Flutter setup
 RUN flutter channel stable
+RUN flutter upgrade
 
 # environment
 ARG ssh_prv_key
@@ -30,46 +18,37 @@ RUN git config --global user.email "giorgiogiuffre23@gmail.com"
 RUN git config --global user.name "Giorgio Giuffrè"
 RUN git clone git@github.com:metralab/metralab-app.git metralab
 
-# setup and testing
+# project setup and testing
 WORKDIR /metralab
 RUN flutter pub get
-# RUN flutter test
+RUN flutter test
 
-# # web build
+# web build
+WORKDIR /metralab
+RUN sed -i 's#base href="/#base href="/metralab-app/#' web/index.html
+RUN flutter build web
+
+# web deployment
+WORKDIR /metralab
+RUN git --work-tree build/web add --all
+RUN git commit -m "Dockerized deployment"
+RUN git push origin HEAD:gh-pages --force
+
+# # Android build
 # WORKDIR /metralab
-# RUN flutter channel beta
-# RUN flutter upgrade
-# RUN flutter config --enable-web
-# RUN flutter create .
-# RUN sed -i 's#base href="/#base href="/metralab-app/#' web/index.html
-# RUN flutter build web
+# RUN flutter build appbundle
 
-# # web deployment
+# # Android deployment
+# WORKDIR /metralab/android
+# RUN gem install fastlane (--> requires apt-get install ruby-full)
+# RUN fastlane init
+# # ...
+
+# # iOS build
 # WORKDIR /metralab
-# RUN git --work-tree build/web add --all
-# RUN git commit -m "Dockerized deployment"
-# RUN git push origin HEAD:gh-pages --force
+# RUN flutter build ios --release --no-codesign
 
-# # cleanup after using Flutter web
-# WORKDIR /metralab
-# RUN flutter channel stable
-# RUN flutter upgrade
-
-# # # Android build
-# # WORKDIR /metralab
-# # RUN flutter build appbundle
-
-# # # Android deployment
-# # WORKDIR /metralab/android
-# # RUN gem install fastlane (--> requires apt-get install ruby-full)
-# # RUN fastlane init
-# # # ...
-
-# # # iOS build
-# # WORKDIR /metralab
-# # RUN flutter build ios --release --no-codesign
-
-# # # iOS deployment
-# # WORKDIR /metralab/ios
-# # RUN fastlane init
-# # # ...
+# # iOS deployment
+# WORKDIR /metralab/ios
+# RUN fastlane init
+# # ...
